@@ -17,6 +17,8 @@ end
 
 response = table.concat(response)
 
+print(response)
+
 local first = {}
 local second = {}
 local total = 0
