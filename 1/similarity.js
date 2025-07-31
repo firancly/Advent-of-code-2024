@@ -1,5 +1,4 @@
-// 2/main.js
-// This script fetches input data from Advent of Code and processes it.
+// Find similarities between two lists of numbers
 require ('dotenv').config();
 const cookie = process.env.SESSION_COOKIE;
 async function fetchInput() {
@@ -43,31 +42,18 @@ async function main() {
     }
 
     let total = 0;
-    while (first.length > 0 && second.length > 0) {
-        let smallestOne = Infinity;
-        let smallestOneIndex = null;
-        for (let i = 0; i < first.length; i++) {
-            if (first[i] < smallestOne) {
-                smallestOne = first[i];
-                smallestOneIndex = i;
+    for (let i = 0; i < first.length; i++) {
+        let count = 0;
+        for (let j = 0; j < second.length; j++) {
+            if (first[i] === second[j]) {
+                count++;
             }
         }
 
-        let smallestTwo = Infinity;
-        let smallestTwoIndex = null;
-        for (let i = 0; i < second.length; i++) {
-            if (second[i] < smallestTwo) {
-                smallestTwo = second[i];
-                smallestTwoIndex = i;
-            }
-        }
-
-        total += Math.abs(parseInt(smallestOne) - parseInt(smallestTwo));
-        first.splice(smallestOneIndex, 1);
-        second.splice(smallestTwoIndex, 1);
+        total += first[i] * count;
     }
 
-    console.log("Total:", total);
+    console.log(`Total similarity score: ${total}`);
 }
 
 main()
